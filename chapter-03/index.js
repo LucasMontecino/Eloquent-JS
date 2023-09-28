@@ -43,15 +43,49 @@ function encontrarSolucion(objetivo) {
   return encontrar(1, "1");
 }
 
-function imprimirInventarioGranja(vacas, pollos) {
-  let stringVaca = String(vacas);
-  while (stringVaca.length < 3) {
-    stringVaca = `0${stringVaca}`;
+function imprimirInventarioGranja(vaca, pollo, cerdo) {
+  console.log(`${acolcharConCeros(vaca, 3)} ${vaca == 1 ? "Vaca" : "Vacas"}`);
+  console.log(
+    `${acolcharConCeros(pollo, 3)} ${pollo == 1 ? "Pollo" : "Pollos"}`
+  );
+  console.log(
+    `${acolcharConCeros(cerdo, 3)} ${cerdo == 1 ? "Cerdo" : "Cerdos"}`
+  );
+}
+
+function acolcharConCeros(numero, amplitud) {
+  let string = String(numero);
+  while (string.length < amplitud) {
+    string = `0${string}`;
   }
-  console.log(`${stringVaca} Vacas`);
-  let stringPollo = String(pollos);
-  while (stringPollo.length < 3) {
-    stringPollo = `0${stringPollo}`;
+  return string;
+}
+
+function minimo(a, b) {
+  return a < b ? a : b;
+}
+
+function esPar(n) {
+  if (n < 0) {
+    if (n == -1) return false;
+    if (n == 0) return true;
+
+    return esPar(n + 2);
   }
-  console.log(`${stringPollo} Pollos`);
+
+  if (n == 0) return true;
+  if (n == 1) return false;
+
+  return esPar(n - 2);
+}
+
+function contarCaracteres(string, letra) {
+  let cuenta = 0;
+
+  for (let i = 0; i < string.length; i++) {
+    if (string[i] === letra) {
+      cuenta++;
+    }
+  }
+  return cuenta;
 }
