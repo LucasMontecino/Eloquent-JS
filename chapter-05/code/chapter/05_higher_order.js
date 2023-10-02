@@ -103,14 +103,14 @@ function codigosTexto(text) {
   let codigos = contarPor(text, (caracter) => {
     let codigo = codigoCaracter(caracter.codePointAt(0));
     return codigo ? codigo.name : "ninguno";
-  }).filter(({ name }) => name != "ninguno");
+  }).filter(({ nombre }) => nombre != "ninguno");
 
-  let total = codigos.reduce((n, { count }) => n + count, 0);
+  let total = codigos.reduce((n, { cuenta }) => n + cuenta, 0);
   if (total == 0) return "No se encontaron códigos";
 
   return codigos
-    .map(({ name, count }) => {
-      return `${Math.round((count * 100) / total)}% ${name}`;
+    .map(({ nombre, cuenta }) => {
+      return `${Math.round((cuenta * 100) / total)}% ${nombre}`;
     })
     .join(", ");
 }
