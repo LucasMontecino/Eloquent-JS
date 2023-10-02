@@ -72,11 +72,11 @@ function promedio(array) {
 // console.log(cuenta);
 // console.log(Math.round(total / cuenta));
 
-function codigoCaracter(codigo_caracter) {
+function charCode(char_code) {
   for (let code of scripts) {
     if (
       code.ranges.some(([first, second]) => {
-        return codigo_caracter >= first && codigo_caracter < second;
+        return char_code >= first && char_code < second;
       })
     ) {
       return code;
@@ -85,34 +85,34 @@ function codigoCaracter(codigo_caracter) {
   return null;
 }
 
-function contarPor(elementos, nombreGrupo) {
-  let cuentas = [];
-  for (let el of elementos) {
-    let nombre = nombreGrupo(el);
-    let conocido = cuentas.findIndex((c) => c.nombre == nombre);
-    if (conocido == -1) {
-      cuentas.push({ nombre, cuenta: 1 });
+function countBy(elements, groupName) {
+  let counts = [];
+  for (let el of elements) {
+    let name = groupName(el);
+    let knew = counts.findIndex((c) => c.name == name);
+    if (knew == -1) {
+      counts.push({ name, count: 1 });
     } else {
-      cuentas[conocido].cuenta++;
+      counts[knew].count++;
     }
   }
-  return cuentas;
+  return counts;
 }
 
-function codigosTexto(text) {
-  let codigos = contarPor(text, (caracter) => {
-    let codigo = codigoCaracter(caracter.codePointAt(0));
-    return codigo ? codigo.name : "ninguno";
-  }).filter(({ nombre }) => nombre != "ninguno");
+function textScripts(text) {
+  let scripts = countBy(text, (char) => {
+    let script = charCode(char.codePointAt(0));
+    return script ? script.name : "none";
+  }).filter(({ name }) => name != "none");
 
-  let total = codigos.reduce((n, { cuenta }) => n + cuenta, 0);
-  if (total == 0) return "No se encontaron códigos";
+  let total = scripts.reduce((n, { count }) => n + count, 0);
+  if (total == 0) return "No scripts found";
 
-  return codigos
-    .map(({ nombre, cuenta }) => {
-      return `${Math.round((cuenta * 100) / total)}% ${nombre}`;
+  return scripts
+    .map(({ name, count }) => {
+      return `${Math.round((count * 100) / total)}% ${name}`;
     })
     .join(", ");
 }
 let text = '英国的狗说"woof", 俄罗斯的狗说"тяв"';
-console.log(codigosTexto(text));
+console.log(textScripts(text));
