@@ -114,5 +114,5 @@ function codigosTexto(text) {
     })
     .join(", ");
 }
-
-console.log(codigosTexto('英国的狗说"woof", 俄罗斯的狗说"тяв"'));
+let text = '英国的狗说"woof", 俄罗斯的狗说"тяв"';
+console.log(codigosTexto(text));
