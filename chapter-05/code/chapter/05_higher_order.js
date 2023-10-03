@@ -72,6 +72,45 @@ function promedio(array) {
 // console.log(cuenta);
 // console.log(Math.round(total / cuenta));
 
+// console.log(textScripts(text));
+
+function flatting(array) {
+  return array.reduce((acc, el) => acc.concat(el), []);
+}
+
+let arrayToFlatting = [[1, 2], [3, 4], [5, 6], 8];
+
+// console.log(flatting(arrayToFlatting));
+
+let scriptsArray = scripts
+  .filter((el) => el.direction == "ttb")
+  .map((el) => el.ranges);
+// console.log(flatting(flatting(scriptsArray)));
+
+function loop(start, test, update, body) {
+  for (let value = start; test(value); value = update(value)) {
+    body(value);
+  }
+}
+
+// loop(
+//   3,
+//   (n) => n > 0,
+//   (n) => n - 1,
+//   console.log
+// );
+
+function every(array, test) {
+  for (let el of array) {
+    if (!test(el)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// console.log(every([16, 6], (n) => n < 10));
+
 function charCode(char_code) {
   for (let code of scripts) {
     if (
@@ -98,7 +137,6 @@ function countBy(elements, groupName) {
   }
   return counts;
 }
-
 function textScripts(text) {
   let scripts = countBy(text, (char) => {
     let script = charCode(char.codePointAt(0));
@@ -115,4 +153,17 @@ function textScripts(text) {
     .join(", ");
 }
 let text = '英国的狗说"woof", 俄罗斯的狗说"тяв"';
-console.log(textScripts(text));
+// console.log(textScripts(text));
+
+function dominantDirection(text) {
+  let counted = countBy(text, (char) => {
+    let script = charCode(char.codePointAt(0));
+    return script ? script.direction : "none";
+  }).filter(({ name }) => name != "none");
+
+  if (counted.length == 0) return "ltr";
+
+  return counted.reduce((a, b) => (a.count > b.count ? a : b)).name;
+}
+
+// console.log(dominantDirection("مساء الخير"));
