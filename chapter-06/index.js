@@ -229,29 +229,37 @@ class Vec {
 // console.log(new Vec(1, 2).minus(new Vec(2, 3)));
 // console.log(new Vec(3, 4));
 
-class Conjunto {
+class Group {
   constructor() {
-    this.contenido = [];
+    this.content = [];
   }
 
   add(value) {
-    if (!this.contenido.includes(value)) this.contenido.push(value);
-    return this.contenido;
+    if (!this.has(value)) this.content.push(value);
+    return this.content;
   }
   delete(value) {
-    if (this.contenido.includes(value)) {
-      let indexValue = this.contenido.indexOf(value);
-      this.contenido.splice(indexValue, 1);
-      return `the element ${value} was deleted successfully! the actual array is ${this.contenido}`;
+    if (this.content.includes(value)) {
+      let indexValue = this.content.indexOf(value);
+      this.content.splice(indexValue, 1);
+      return `the element ${value} was deleted successfully! the actual array is ${this.content}`;
     }
   }
 
   has(value) {
-    return this.contenido.includes(value);
+    return this.content.includes(value);
+  }
+
+  static since(collection) {
+    let group = new Group();
+    for (let val of collection) {
+      group.add(val);
+    }
+    return group;
   }
 }
 
-let nuevoConj = new Conjunto();
+let nuevoConj = new Group();
 console.log(nuevoConj.add(10));
 console.log(nuevoConj.add(10));
 console.log(nuevoConj.add(15));
@@ -262,3 +270,5 @@ console.log(nuevoConj.delete(7));
 console.log(nuevoConj.delete());
 console.log(nuevoConj.delete(2));
 console.log(nuevoConj);
+console.log(nuevoConj.has(12));
+console.log(Group.since([10, 25]));
