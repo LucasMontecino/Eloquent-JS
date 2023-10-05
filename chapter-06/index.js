@@ -272,3 +272,6 @@ console.log(nuevoConj.delete(2));
 console.log(nuevoConj);
 console.log(nuevoConj.has(12));
 console.log(Group.since([10, 25]));
+
+let conjIterater = "Conjunto"[Symbol.iterator]();
+console.log(conjIterater);
