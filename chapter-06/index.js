@@ -246,7 +246,9 @@ class Conjunto {
     }
   }
 
-  has(value) {}
+  has(value) {
+    return this.contenido.includes(value);
+  }
 }
 
 let nuevoConj = new Conjunto();
