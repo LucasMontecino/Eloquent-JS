@@ -225,6 +225,38 @@ class Vec {
   }
 }
 
-console.log(new Vec(1, 2).plus(new Vec(2, 3)));
-console.log(new Vec(1, 2).minus(new Vec(2, 3)));
-console.log(new Vec(3, 4));
+// console.log(new Vec(1, 2).plus(new Vec(2, 3)));
+// console.log(new Vec(1, 2).minus(new Vec(2, 3)));
+// console.log(new Vec(3, 4));
+
+class Conjunto {
+  constructor() {
+    this.contenido = [];
+  }
+
+  add(value) {
+    if (!this.contenido.includes(value)) this.contenido.push(value);
+    return this.contenido;
+  }
+  delete(value) {
+    if (this.contenido.includes(value)) {
+      let indexValue = this.contenido.indexOf(value);
+      this.contenido.splice(indexValue, 1);
+      return `the element ${value} was deleted successfully! the actual array is ${this.contenido}`;
+    }
+  }
+
+  has(value) {}
+}
+
+let nuevoConj = new Conjunto();
+console.log(nuevoConj.add(10));
+console.log(nuevoConj.add(10));
+console.log(nuevoConj.add(15));
+console.log(nuevoConj.add(7));
+console.log(nuevoConj.add(12));
+console.log(nuevoConj.delete(15));
+console.log(nuevoConj.delete(7));
+console.log(nuevoConj.delete());
+console.log(nuevoConj.delete(2));
+console.log(nuevoConj);
